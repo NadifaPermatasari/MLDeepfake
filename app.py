@@ -2,8 +2,8 @@ import streamlit as st
 import requests
 import tensorflow as tf
 import os
-from tensorflow import load_model
-from tensorflow import image
+from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing import image
 import numpy as np
 from PIL import Image
 
