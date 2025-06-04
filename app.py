@@ -1,6 +1,9 @@
 import streamlit as st
 import requests
+import tensorflow as tf
 import os
+from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing import image
 import numpy as np
 from PIL import Image
 
@@ -96,11 +99,4 @@ if uploaded_file is not None:
     """, unsafe_allow_html=True)
 
     st.progress(confidence)
-
-    with st.expander("ℹ️ Detail Model & Analisis"):
-        st.markdown("""
-        - Model ini menggunakan CNN (Convolutional Neural Network).
-        - Input gambar diproses dengan ukuran 224x224 piksel.
-        - Confidence di atas 0.5 = dianggap deepfake.
-        - Confidence di bawah 0.5 = dianggap asli.
-        """)
+    
