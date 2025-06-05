@@ -2,8 +2,6 @@ import streamlit as st
 import requests
 import tensorflow as tf
 import os
-from tensorflow.keras.models import load_model
-from tensorflow.preprocessing import image
 import numpy as np
 from PIL import Image
 
@@ -52,7 +50,7 @@ model_url = "https://drive.google.com/uc?export=download&id=1OvUKBw5-9ZEpROTCpmX
 model_path = "model_slim.h5"
 
 download_file_from_gdrive(model_url, model_path)
-model = load_model(model_path)
+model = tf.keras.models.load_model(model_path)  # ✅ hanya pakai tensorflow
 
 # ---------- HEADER ----------
 st.markdown('<div class="title">🔍 Deepfake Image Detector</div>', unsafe_allow_html=True)
@@ -64,8 +62,8 @@ uploaded_file = st.file_uploader("📂 Pilih gambar wajah (jpg/jpeg/png)", type=
 def preprocess_image(img: Image.Image, target_size=(224, 224)):
     img = img.convert("RGB")
     img = img.resize(target_size)
-    img_array = image.img_to_array(img)
-    img_array = np.expand_dims(img_array, axis=0)
+    img_array = tf.keras.utils.img_to_array(img)
+    img_array = tf.expand_dims(img_array, axis=0)
     img_array = img_array / 255.0
     return img_array
 
@@ -99,4 +97,3 @@ if uploaded_file is not None:
     """, unsafe_allow_html=True)
 
     st.progress(confidence)
-    
