@@ -168,6 +168,8 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
+import tensorflow as tf
+
 # ---------- DOWNLOAD MODEL ----------
 @st.cache_resource
 def download_file_from_gdrive(url, output_path):
@@ -179,12 +181,13 @@ def download_file_from_gdrive(url, output_path):
                     f.write(chunk)
     return output_path
 
-# Ganti dengan file ID dari model deepfake kamu di Google Drive
-model_url = "https://drive.google.com/uc?export=download&id=1OvUKBw5-9ZEpROTCpmXkGwwUVl9qSHuN"
-model_path = "model_slim.h5"
+# Link file Google Drive (ubah ke direct download link)
+model_url = "https://drive.google.com/uc?export=download&id=1cZgWS_6pL1hIDq03s_bWy7kfMlshhqtS"
+model_path = "model_revisi.h5" 
 
+# Unduh dan load model
 download_file_from_gdrive(model_url, model_path)
-model = tf.keras.models.load_model(model_path)  # ✅ hanya pakai tensorflow
+model = tf.keras.models.load_model(model_path)
 
 # ---------- HEADER ----------
 st.markdown('<div class="title">🔍 Deepfake Image Detector</div>', unsafe_allow_html=True)
